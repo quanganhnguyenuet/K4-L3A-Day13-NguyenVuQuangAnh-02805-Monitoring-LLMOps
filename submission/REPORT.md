@@ -6,7 +6,7 @@
 - **MSSV:** 2A202602805
 - **Lớp:** K4-L3A
 - **Repository:** https://github.com/quanganhnguyenuet/K4-L3A-Day13-NguyenVuQuangAnh-02805-Monitoring-LLMOps
-- **Commit SHA nộp:** cập nhật sau commit cuối
+- **Commit SHA nộp:** 437b7ab
 - **Langfuse project:** `day13-k4-l3a-02805`
 - **Challenge ID:** `day13-k4-l3a-monitoring-llmops-v1`
 
