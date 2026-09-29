@@ -2,7 +2,25 @@ from __future__ import annotations
 
 import os
 from contextlib import contextmanager
+from functools import wraps
 from typing import Any
+
+
+class _NoopObservation:
+    def update(self, **kwargs: Any) -> None:
+        return None
+
+
+@contextmanager
+def start_as_current_observation(client: Any, **kwargs: Any):
+    """Start a v4 observation, or no-op for lightweight test/fallback clients."""
+    starter = getattr(client, "start_as_current_observation", None)
+    if callable(starter):
+        with starter(**kwargs) as observation:
+            yield observation
+        return
+
+    yield _NoopObservation()
 
 try:
     from langfuse import get_client, observe, propagate_attributes
@@ -13,7 +31,11 @@ except ImportError:  # pragma: no cover - chỉ dùng khi chưa cài requirement
 
     def observe(*args: Any, **kwargs: Any):
         def decorator(func):
-            return func
+            @wraps(func)
+            def wrapper(*func_args: Any, **func_kwargs: Any):
+                return func(*func_args, **func_kwargs)
+
+            return wrapper
 
         return decorator
 
@@ -22,6 +44,14 @@ except ImportError:  # pragma: no cover - chỉ dùng khi chưa cài requirement
             return None
 
         def update_current_generation(self, **kwargs: Any) -> None:
+            return None
+
+        @contextmanager
+        def start_as_current_observation(self, **kwargs: Any):
+            yield _DummyObservation()
+
+    class _DummyObservation:
+        def update(self, **kwargs: Any) -> None:
             return None
 
     def get_client():
