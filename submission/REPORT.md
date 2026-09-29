@@ -102,8 +102,8 @@ Prompt version giúp tái hiện và rollback thay đổi; token/cost theo dõi 
 
 - [x] Lưu output pytest cuối vào `evidence/01-pytest.txt`.
 - [x] Log validator 100/100 và dashboard validator 6/6.
-- [ ] Chụp đủ evidence `04`, `05`, `07`–`14`.
-- [ ] Điền trace ID incident và trace IDs prompt v1/v2.
-- [ ] Cập nhật commit SHA cuối trong mục 1.
+- [x] Chụp đủ evidence `04`, `05`, `07`–`14`.
+- [x] Điền trace ID incident và trace IDs prompt v1/v2.
+- [x] Cập nhật commit SHA cuối trong mục 1.
 - [x] Xác nhận không commit `.env`, `config/challenge.json`, logs, `.venv` hoặc cache.
 - [x] Commit, push và nộp repository URL cùng commit SHA trên LMS/Codelabs.
